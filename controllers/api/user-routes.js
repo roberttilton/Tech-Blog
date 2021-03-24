@@ -9,6 +9,7 @@ router.post('/', async (req, res) => {
         password: req.params.password
       // TOD: SET PASSWORD TO PASSWORD SENT IN REQUEST
     });
+    
 
     req.session.save(() => {
       // TODO: SET USERID IN REQUEST SESSION TO ID RETURNED FROM DATABASE
