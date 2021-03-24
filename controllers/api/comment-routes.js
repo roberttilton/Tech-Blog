@@ -7,11 +7,9 @@ router.post('/', withAuth, async (req, res) => {
   try {
     const newComment = await Comment.create({
       // TODO: COMMENT BODY IN REQUEST USING SPREAD
-
+      ...req.body,
       // TODO: SET USERID TO SESSION LOGGEDIN USERID
-      where: {
-        user_id: req.session.user_id
-      }
+      userid: req.session.userid
     });
     res.json(newComment);
   } catch (err) {

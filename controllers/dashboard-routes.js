@@ -5,10 +5,8 @@ const withAuth = require('../utils/auth');
 router.get('/', withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
-      where: {
         // TODO: SET USERID TO THE LOGGED-IN USER ID
-        user_id: req.session.user_id
-      },
+        userid: req.session.userid
     });
 
     const posts = postData.map((post) => post.get({ plain: true }));
