@@ -5,11 +5,11 @@ router.post('/', async (req, res) => {
   try {
     const newUser = await User.create({
       // TODO: SET USERNAME TO USERNAME SENT IN REQUEST
-        username: req.params.username,
-        password: req.params.password
+      username: req.params.username,
+      password: req.params.password
       // TOD: SET PASSWORD TO PASSWORD SENT IN REQUEST
     });
-    
+
 
     req.session.save(() => {
       // TODO: SET USERID IN REQUEST SESSION TO ID RETURNED FROM DATABASE
@@ -68,5 +68,17 @@ router.post('/logout', (req, res) => {
     res.status(404).end();
   }
 });
+
+router.get('/', (req, res) => {
+  User.findAll({
+          attributes: { exclude: ['[password'] }
+      })
+      .then(user => res.json(user))
+      .catch(err => {
+          console.log(err);
+          res.status(500).json(err);
+      });
+});
+
 
 module.exports = router;
